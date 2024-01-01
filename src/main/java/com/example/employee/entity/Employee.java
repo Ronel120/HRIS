@@ -1,18 +1,25 @@
 package com.example.employee.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+@Table(name = "employee")
 @Entity
 @Data
-public class Employee {
+@EntityListeners(AuditingEntityListener.class)
+public class Employee extends RootEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String firstName;
+    @Column(name = "employeeNumber",unique = true)
+    private String employeeNumber;
+
+    @Embedded
+    @Column(name = "name")
+    private Name name;
+
+
 }
