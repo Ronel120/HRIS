@@ -1,5 +1,6 @@
 package com.example.employee.service;
 
+import com.example.employee.dto.EmployeeDto;
 import com.example.employee.entity.Employee;
 import com.example.employee.exception.DataNotFoundException;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    Employee add(Employee employee);
+    EmployeeDto add(EmployeeDto employeeDto);
 
     List<Employee> list();
 

@@ -1,5 +1,6 @@
 package com.example.employee.controller;
 
+import com.example.employee.dto.EmployeeDto;
 import com.example.employee.entity.Employee;
 import com.example.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<Employee> add(@RequestBody Employee employee) {
-        return new ResponseEntity<>(employeeRepository.add(employee), HttpStatus.OK);
+    public ResponseEntity<EmployeeDto> add(@RequestBody EmployeeDto employeeDto) {
+        return new ResponseEntity<>(employeeRepository.add(employeeDto), HttpStatus.OK);
     }
 
     @GetMapping

@@ -1,7 +1,9 @@
 package com.example.employee.service.EmployeeServiceImpl;
 
+import com.example.employee.dto.EmployeeDto;
 import com.example.employee.entity.Employee;
 import com.example.employee.exception.DataNotFoundException;
+import com.example.employee.mapper.EmployeeMapper;
 import com.example.employee.repository.EmployeeRepository;
 import com.example.employee.service.EmployeeService;
 import com.example.employee.util.EmployeeNumberGenerator;
@@ -17,17 +19,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
-    EmployeeServiceImpl(EmployeeRepository employeeRepository, EmployeeNumberGenerator employeeNumberGenerator){
+    private final EmployeeMapper mapper;
+
+    EmployeeServiceImpl(EmployeeRepository employeeRepository, EmployeeNumberGenerator employeeNumberGenerator, EmployeeMapper employeeMapper){
         this.employeeRepository = employeeRepository;
         generator = employeeNumberGenerator;
+        mapper = employeeMapper;
     }
 
     @Override
     @Transactional
-    public Employee add(Employee employee) {
+    public EmployeeDto add(EmployeeDto employeeDto) {
         String employeeNumber = generator.generate();
-        employee.setEmployeeNumber(employeeNumber);
-        return employeeRepository.save(employee);
+        employeeDto.setEmployeeNumber(employeeNumber);
+        Employee employee = mapper.toEntity(employeeDto);
+        return mapper.toDto(employeeRepository.save(employee));
     }
 
     @Override
