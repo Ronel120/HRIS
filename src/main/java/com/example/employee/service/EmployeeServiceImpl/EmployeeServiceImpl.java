@@ -33,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional(readOnly = true)
     public List<Employee> list() {
-        return employeeRepository.findAll();
+        return employeeRepository.findAllByDeletedIsFalse();
     }
 
     @Override
@@ -43,5 +43,14 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElseThrow(()-> new DataNotFoundException("Data not found"));
         employee1.setName(employee.getName());
         return employeeRepository.save(employee1);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) throws DataNotFoundException{
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(()-> new DataNotFoundException("Data not found"));
+        employee.setDeleted(true);
+        employeeRepository.save(employee);
     }
 }

@@ -12,4 +12,6 @@ public interface EmployeeService {
     List<Employee> list();
 
     Employee update(Long id, Employee employee) throws DataNotFoundException;
+
+    void delete(Long id) throws DataNotFoundException;
 }
