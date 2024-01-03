@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.List;
+
 @Table(name = "employee")
 @Entity
 @Data
@@ -14,12 +16,15 @@ public class Employee extends RootEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "employeeNumber",unique = true)
+    @Column(unique = true)
     private String employeeNumber;
 
-    @Embedded
-    @Column(name = "name")
     private Name name;
+
+    private ContactInfo contactInfo;
+
+
+
 
 
 }
