@@ -2,6 +2,7 @@ package com.example.employee.service.EmployeeServiceImpl;
 
 import com.example.employee.dto.EmployeeDto;
 import com.example.employee.entity.Employee;
+import com.example.employee.enums.Department;
 import com.example.employee.exception.DataNotFoundException;
 import com.example.employee.mapper.EmployeeMapper;
 import com.example.employee.repository.EmployeeRepository;
@@ -58,5 +59,9 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElseThrow(()-> new DataNotFoundException("Data not found"));
         employee.setDeleted(true);
         employeeRepository.save(employee);
+
+        Department aa = Department.ENGINEERING;
+        aa.
+
     }
 }

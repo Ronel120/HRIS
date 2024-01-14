@@ -1,10 +1,11 @@
 package com.example.employee.entity;
 
+import com.example.employee.enums.Department;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 @Table(name = "employee")
 @Entity
@@ -23,8 +24,12 @@ public class Employee extends RootEntity {
 
     private ContactInfo contactInfo;
 
+    @Enumerated(EnumType.STRING)
+    private Department department;
 
+    private String address;
 
+    private BigDecimal salaryGrade;
 
-
+    private BigDecimal salaryBase;
 }
